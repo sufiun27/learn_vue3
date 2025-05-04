@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn Vue 3</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+      }
+      #app {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      input {
+        padding: 8px;
+        width: 100%;
+        max-width: 300px;
+      }
+      .error {
+        color: red;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Learn Vue 3</h1>
+
+      <!-- Counter Section -->
+      <section>
+        <h2>Counter</h2>
+        <button v-on:click="increment">Increment</button>
+        <button v-on:click="decrement">Decrement</button>
+        <p>Counter: {{ counter }}</p>
+      </section>
+
+      <!-- Name Input Section -->
+      <section>
+        <h2>Name Input</h2>
+        <input
+          type="text"
+          v-model="name"
+          v-on:keyup.enter="setCompleteName"
+          placeholder="Enter your name"
+        />
+        <p v-if="completeName">Full Name: {{ completeName }}</p>
+        <p v-if="nameError" class="error">{{ nameError }}</p>
+      </section>
+
+      <!-- Form Section -->
+      <section>
+        <h2>Form Submission</h2>
+        <form v-on:submit.prevent="handleSubmit">
+          <input
+            type="text"
+            v-model="details"
+            placeholder="Enter details"
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+        <p v-if="details">Current Details: {{ details }}</p>
+        <p v-if="submittedDetails">Submitted Details: {{ submittedDetails }}</p>
+      </section>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+</html>
