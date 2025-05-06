@@ -97,6 +97,7 @@ Vue.createApp({
         },
         specialAttackPlayer(){},
         healPlayer(){
+            this.counter++;
             const healValue = getRandomValue(8, 15);
             this.playerHealt += healValue;
             this.attackPlayer();

@@ -29,7 +29,32 @@
           <div class="healthbar__value" :style="playerHealthBar"></div>
         </div>
       </section>
-      <h2>{{isGameRunning ? 'Game is Running' : 'Game Over'}}</h2>
+
+      <section id="game-stats" class="container" v-if="!isGameRunning">
+        <h2>Game Stats</h2>
+        <div class="stats">
+          <div class="stat">
+            <h3>Player Health</h3>
+            <p>{{ playerHealt }}</p>
+          </div>
+          <div class="stat">
+            <h3>Monster Health</h3>
+            <p>{{ monsterHealt }}</p>
+          </div>
+          <div class="stat">
+            <h3>Round Play</h3>
+            <p>{{ counter }}</p>
+          </div>
+        </div>
+
+        <div>
+          <h2>{{ whoWinMassage }}</h2>
+        </div>
+        <button @click="resetGame">Start Game</button>
+      </section>
+
+
+      <h2 class="container">{{isGameRunning ? 'Game is Running' : 'Game Over'}}</h2>
       <section id="controls" v-show="isGameRunning">
         <button @click="attackMosnter">ATTACK</button>
         <button :disabled="counter%3===0" @click="specialAttackMonster">SPECIAL ATTACK </button>
@@ -39,7 +64,7 @@
       <section id="log" class="container">
         <h2>Battle Log</h2>
         <ul>
-          <li v-for="(log, index) in  batteleLog" :key="index"> {{counter}} {{ log.who }} -- {{ log.action }}: {{ log.value }} now health: {{ log.who === 'Player' ? playerHealt : monsterHealt }}</li>
+          <li v-for="(log, index) in  batteleLog" :key="index">  {{ log.who }} -- {{ log.action }}: {{ log.value }} now health: {{ log.who === 'Player' ? playerHealt : monsterHealt }}</li>
           <li v-if=" batteleLog.length === 0">No logs available</li>
         </ul>
       </section>
