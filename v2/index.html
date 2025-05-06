@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Learn Vue 3</title>
+    <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.js"></script>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -42,6 +43,7 @@
         <button v-on:click="increment">Increment</button>
         <button v-on:click="decrement">Decrement</button>
         <p>Counter: {{ counter }}</p>
+        <p v-if="counter > 5" class="error">Counter is too high!</p>
       </section>
 
       <!-- Name Input Section -->
@@ -50,10 +52,15 @@
         <input
           type="text"
           v-model="name"
-          v-on:keyup.enter="setCompleteName"
-          placeholder="Enter your name"
+          placeholder="Enter your first name"
         />
-        <p v-if="completeName">Full Name: {{ completeName }}</p>
+        <input
+          type="text"
+          v-model="lastName"
+          placeholder="Enter your last name"
+        />
+        <button v-on:click.prevent="setFullName">Set Full Name</button>
+        <p v-if="getfullName">Full Name: {{ getfullName }}</p>
         <p v-if="nameError" class="error">{{ nameError }}</p>
       </section>
 
@@ -74,6 +81,6 @@
       </section>
     </div>
 
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="app.js"></script>
+  </body>
 </html>

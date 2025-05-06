@@ -20,24 +20,28 @@
       <section id="monster" class="container">
         <h2>Monster Health</h2>
         <div class="healthbar">
-          <div class="healthbar__value" :style="{width: monsterHealt + '%'}"></div>
+          <div class="healthbar__value" :style="monsterHealthBar"></div>
         </div>
       </section>
       <section id="player" class="container">
         <h2>Your Health</h2>
         <div class="healthbar">
-          <div class="healthbar__value" :style="{width: playerHealt + '%'}"></div>
+          <div class="healthbar__value" :style="playerHealthBar"></div>
         </div>
       </section>
-      <section id="controls">
+      <h2>{{isGameRunning ? 'Game is Running' : 'Game Over'}}</h2>
+      <section id="controls" v-show="isGameRunning">
         <button @click="attackMosnter">ATTACK</button>
-        <button @click="specialAttackMonster">SPECIAL ATTACK</button>
-        <button @click=" healPlayer">HEAL</button>
+        <button :disabled="counter%3===0" @click="specialAttackMonster">SPECIAL ATTACK </button>
+        <button :disabled="counter%2===0" @click=" healPlayer">HEAL</button>
         <button @click="surrender">SURRENDER</button>
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
-        <ul></ul>s
+        <ul>
+          <li v-for="(log, index) in  batteleLog" :key="index"> {{counter}} {{ log.who }} -- {{ log.action }}: {{ log.value }} now health: {{ log.who === 'Player' ? playerHealt : monsterHealt }}</li>
+          <li v-if=" batteleLog.length === 0">No logs available</li>
+        </ul>
       </section>
     </div>
   </body>
